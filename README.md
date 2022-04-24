@@ -4,7 +4,7 @@ Because sometimes you just want to host static content inside an AWS lambda.
 
 ## How it works
 
-All this Go program does is wrap `http.FileServer` inside an AWS lambda handler that can interpret API Gateway requests, and tranforms the response into something API Gateway can return to the user.
+All this Go program does is wrap `http.FileServer` inside an AWS lambda handler that can interpret API Gateway requests, and transforms the response into something API Gateway can return to the browser.
 
 It assumes that the static content is served from `/var/www/html`, however, that path can be changed with the `CONTENT_DIR` environment variable.
 
