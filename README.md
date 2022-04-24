@@ -24,5 +24,22 @@ COPY /content ./
 ENTRYPOINT ["/lambda-static-server"]
 ```
 
+or, if you want to be super slim
+
+```
+FROM busybox as build
+
+ADD https://github.com/cds-snc/static-content-lambda/raw/main/release/latest/lambda-static-server /lambda-static-server
+RUN chmod 755 /lambda-static-server
+
+FROM scratch
+COPY --from=build /lambda-static-server /lambda-static-server
+
+WORKDIR /var/www/html
+COPY /content ./
+
+ENTRYPOINT ["/lambda-static-server"]
+```
+
 ## License
 MIT
