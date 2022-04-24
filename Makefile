@@ -7,8 +7,10 @@ dev:
 
 release:
 	@mkdir -p release/latest
-	@CGO_ENABLED=0 GOOS=linux go build -trimpath -o release/latest/lambda-static-server
-	@chmod 777 release/latest/lambda-static-server
+	@docker build -t static-content-lambda-build -f Dockerfile.build .
+	@docker create -ti --name static-content-lambda-build static-content-lambda-build bash 
+	@docker cp static-content-lambda-build:/lambda-static-server release/latest/lambda-static-server
+	@docker rm -f static-content-lambda-build
 
 test:
 	@cat test_payloads/root.json  | curl -X POST "http://localhost:8080/2015-03-31/functions/function/invocations" --data-binary @-
