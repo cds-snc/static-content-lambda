@@ -14,7 +14,7 @@ The `Dockerfile` in this repo includes an example of how to use this server with
 
 ```
 FROM scratch
-ADD https://github.com/cds-snc/static-content-lambda/blob/main/release/latest/lambda-static-server /lamba-static-server
+ADD https://github.com/cds-snc/static-content-lambda/blob/main/release/latest/lambda-static-server /lambda-static-server
 
 WORKDIR /var/www/html
 COPY /content ./
